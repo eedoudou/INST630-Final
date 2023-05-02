@@ -1,0 +1,18 @@
+:root{
+    --color-background: #EFEFEF;
+    --color-purple1: #DAD5F4;
+    --color-purple2: #6144FA;
+    --color-up: #228C00;
+    --color-down: #BC0000;
+    --color-text: #000000;
+    --color-caption: #94918A;
+
+    --card-border-radius: 12.944px;
+    --border-radius: 30.1961px;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 1.94807px 59.7099px 108.531px rgba(96, 96, 224, 0.05525), 0.986211px 30.2281px 47.3126px rgba(96, 96, 224, 0.085), 0.389614px 11.942px 17.6362px rgba(96, 96, 224, 0.11475), 0.0852281px 2.61231px 6.27443px rgba(96, 96, 224, 0.17);
+
+}
