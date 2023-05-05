@@ -2,7 +2,7 @@
 
 This project is intended to create a live weather dashboard that shows different type of weather data. The city it will show is the city where the user currently at.
 
-The weather data originates from the OpenWeather API, which is a platform that provides weather information. The D3.js library was utilized to construct the weather visualization.
+The weather data originates from the OpenWeather API, which is a platform that provides weather information. The Chart.js library was utilized to construct the weather visualization.
 
 Here's a shot of the dashboard.
 
