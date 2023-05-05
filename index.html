@@ -10,10 +10,13 @@
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"/>
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+            integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
-
-</body>
 <div class="container">
     <aside>
         <div class="top-left">
@@ -76,12 +79,12 @@
                         <span class="material-symbols-rounded">
                         Rainy
                         </span>
-                        <largetext>10°</largetext>
-                        <h2>College Park, MD</h2>
+                        <largetext id><num id="current-temp">10</num>°C</largetext>
+                        <h2 id="address">College Park, US</h2>
                     </a>
                     <b>
-                        <h3>7:30PM</h3>
-                        <h2>Sunset Time, Wednesday</h2>
+                        <h3 id="current-time">7:30PM</h3>
+                        <h2 id="sunset-time-major">Sunset Time, Wednesday</h2>
                     </b>
                 </div>
             </div>
@@ -94,7 +97,7 @@
                         </span>
                     <a>
                         <h2>Humidity</h2>
-                        41%
+                        <num id="current-humidity">10%</num>
                     </a>
                 </item>
                 <item>
@@ -103,7 +106,7 @@
                         </span>
                     <a>
                         <h2>Sunrise</h2>
-                        41%
+                        <time id="sunrise-time-minor">asdf</time>
                     </a>
                 </item>
                 <hr class="separator">
@@ -112,8 +115,8 @@
                         wb_sunny
                         </span>
                     <a>
-                        <h2>UV Index</h2>
-                        41%
+                        <h2>Feels Like</h2>
+                        <num id="current-feelslike">10%</num>
                     </a>
                 </item>
                 <item>
@@ -122,7 +125,7 @@
                         </span>
                     <a>
                         <h2>Sunset</h2>
-                        41%
+                        <time id="sunset-time-minor">asdf</time>
                     </a>
                 </item>
 
@@ -143,6 +146,7 @@
 
             <div class="forecast item4">
                 <h2>Temperature • Precipitation • Wind</h2>
+                <div id="curve_chart" style="height: 150px"></div>
                 <hr class="divider">
                 <div class="table">
                     <a>
@@ -237,4 +241,6 @@
 
     </main>
 </div>
+<script src="script.js" defer></script>
+</body>
 </html>

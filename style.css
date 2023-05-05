@@ -193,12 +193,6 @@ aside .sidebar a.active {
 aside .sidebar a.active:hover{
     box-shadow:none;
 }
-/*aside .sidebar a.active:before{*/
-/*    content: '';*/
-/*    width: 6px;*/
-/*    height: 100%;*/
-/*    background: var(--color-greyblue);*/
-/*}*/
 
 aside .sidebar a.active span {
     color: var(--color-text-dark);
@@ -263,16 +257,16 @@ input[type=text]{
 
 .grid {
     display: grid;
-    grid-template-areas: "header  header header header header" "left left main main main" "bottom bottom main main main";
+    grid-template-areas: "header  header header header header"  "header  header header header header" "left left main main main" "bottom bottom main main main";
     gap: 2.5rem;
-    justify-content: stretch;
-
+    height: 85lvh;
+    align-content: stretch;
 }
 
 .item1 { grid-area: header; }
 .item2 {grid-area:left; }
 .item3 {grid-area:bottom; }
-.item4 { grid-area: main; }
+.item4 { grid-area: main;  }
 
 /*----------hero--------*/
 .hero h2 {
@@ -295,10 +289,10 @@ input[type=text]{
 
 .hero {
     width: 100%;
-    height: 20rem;
+    height: auto;
     border-radius: var(--border-radius-3);
 
-    background-image: url("src/gif/rainy.gif");
+    background-image: url("src/gif/cloudy.gif");
     background-position: center;
     background-size: cover;
     box-shadow: var(--box-shadow);
@@ -381,6 +375,7 @@ input[type=text]{
     column-gap: 28px;
     row-gap: 40px;
     justify-content: space-around;
+    align-items: center;
 }
 
 .detail:hover {
@@ -425,6 +420,7 @@ input[type=text]{
 
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 2.5rem 2.75rem;
 }
 
@@ -500,6 +496,7 @@ input[type=text]{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    justify-items: center;
 }
 
 .forecast:hover{
