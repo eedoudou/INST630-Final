@@ -112,10 +112,14 @@ function getWeather(lat, lon){
 
         let chartData = [];
         chartData.push(["Time", "Temperature"]);
+        let minTemp = 80;
+        let maxTemp = -40;
 
         for (let i = 0; i < 7; i ++){
             let time = weatherList[i].date.getHours() % 12 + " " + (weatherList[i].date.getHours() >= 12 ? "PM" : "AM");
-            chartData.push([time, Math.round(weatherList[i].temp)]);
+            chartData.push([time, weatherList[i].temp]);
+            minTemp = Math.min(minTemp, weatherList[i].temp);
+            maxTemp = Math.max(maxTemp, weatherList[i].temp);
             let weather = weatherList[i].weather;
             let firstDigitStr = String(weather)[0];
             let weatherString = "Sunny";
@@ -161,6 +165,12 @@ function getWeather(lat, lon){
                     }
                 },
                 vAxis: {
+
+                    viewWindowMode:'explicit',
+                    viewWindow: {
+                        max:maxTemp,
+                        min:minTemp
+                    },
                     gridlines: {
                         color: 'transparent'
                     }
