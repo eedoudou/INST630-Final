@@ -461,6 +461,21 @@ input[type=text]{
 }
 
 /*----------forecast--------*/
+
+.forecast{
+    background: var(--color-white);
+    border-radius: var(--border-radius-3);
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+
+    position: relative;
+    padding: 1.125rem 3.4rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    justify-items: center;
+}
+
 .forecast h2{
     font-size: 1.25rem;
     font-weight: 400;
@@ -483,20 +498,6 @@ input[type=text]{
 
 .forecast span{
     color: var(--color-text-dark);
-}
-
-.forecast{
-    background: var(--color-white);
-    border-radius: var(--border-radius-3);
-    box-shadow: var(--box-shadow);
-    transition: all 300ms ease;
-
-    position: relative;
-    padding: 1.125rem 3.4rem 2.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    justify-items: center;
 }
 
 .forecast:hover{
@@ -533,6 +534,17 @@ input[type=text]{
     padding: 0px;
     gap: 18px;
 }
+
+.curve-chart {
+    width: 100%;
+    min-height: 450px;
+}
+
+
+
+/*}*/
+
+
 
 /*===============Media================*/
 /*@media screen and (max-width: 768px){*/
@@ -587,6 +599,5 @@ input[type=text]{
 /*    width: 94%;*/
 /*    margin: 0 auto 4rem;*/
 /*}*/
-
 
 

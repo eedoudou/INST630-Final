@@ -162,12 +162,12 @@ function getWeather(lat, lon){
                     width: 630
                 },
 
-                curveType: 'function',
+                curveType: 'linear',
                 legend: {position: 'none'},
                 backgroundColor: {fill: 'transparent'},
                 hAxis: {
-                    baselineColor: 'none', textPosition: 'none', gridlines: {
-                        color: 'transparent'
+                    baselineColor: '#e0440e', textPosition: 'none', gridlines: {
+                        color: '#transparent'
                     }
                 },
                 vAxis: {
