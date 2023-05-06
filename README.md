@@ -6,4 +6,4 @@ The weather data originates from the OpenWeather API, which is a platform that p
 
 Here's a shot of the dashboard.
 
-![Screen Shot 2023-05-06 at 00 03 49](https://user-images.githubusercontent.com/32424134/236598863-3ddea604-54e8-4614-8b7e-e76103768d21.png)
+![Screen Shot 2023-05-06 at 00 06 53](https://user-images.githubusercontent.com/32424134/236598898-90fc407e-7de3-4e60-a424-51654dc503d2.png)
