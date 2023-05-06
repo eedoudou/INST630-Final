@@ -191,19 +191,22 @@ function getWeather(lat, lon){
     });
 }
 
-let lon = 38.98;
-let lat = -76.93;
+let lat = 38.98;
+let lon = -76.93;
 if (navigator.geolocation) {
+    var positionOption = { timeout: 500, enableHighAccuracy: true };
+    var gpsFailed = function() {
+        //use some 3rd party position solution(get position by your device ip)
+    };
     navigator.geolocation.getCurrentPosition(function (position){
         lon = position.coords.longitude;
         lat = position.coords.latitude;
 
-        console.log(lon, lat);
-        getWeather(lat, lon);
-    });
-}else{
-    console.log("");
-}
 
+    }, gpsFailed, positionOption);
+};
+
+console.log(lon, lat);
+getWeather(lat, lon);
 
 
