@@ -6,6 +6,8 @@ let country;
 let appid = "5be662184a5f66d241c04ec58eab34ec";
 
 let day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+let dayShort = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
 let month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 let gifSrc = "src/gif/";
@@ -29,7 +31,7 @@ let materialDict = {
 let updateTime = function () {
     let date = new Date();
 
-    let timeStr = day[date.getDay()] + ' ' + month[date.getMonth()] + ' ' + date.getDate() + ' ' + date.getHours() + ':' + (date.getMinutes()<10?'0':'') + date.getMinutes();
+    let timeStr = day[date.getDay()] + ' ' + month[date.getMonth()] + ' ' + date.getDate() + ' ' + date.getHours() % 12 + ':' + (date.getMinutes()<10?'0':'') + date.getMinutes()  + " " + (date.getHours() >= 12 ? "PM" : "AM");
     document.getElementById('current-time').innerText = timeStr;
 };
 
@@ -39,7 +41,7 @@ setInterval(updateTime, 1000);
 function getWeather(lat, lon){
     let curWeatherApi = weatherApi + "?lat=" + lat + "&lon=" + lon + "&appid=" + appid + "&units=metric";
     $.getJSON(curWeatherApi, function (data) {
-        console.log(data);
+        // console.log(data);
 
         document.getElementById("current-temp").innerText = Math.round(data["main"]["temp"]);
         document.getElementById("current-humidity").innerText = data["main"]["humidity"] + "%";
@@ -67,30 +69,77 @@ function getWeather(lat, lon){
     });
     let curForecastApi = forecastApi + "?lat=" + lat + "&lon=" + lon + "&appid=" + appid + "&units=metric";
     $.getJSON(curForecastApi, function (data) {
-        console.log(data)
+        // console.log(data);
 
         let cityName = data["city"]["name"];
         let country = data["city"]["country"];
         document.getElementById("address").innerText = cityName + ", " + country;
 
         let sunrise = new Date((data["city"]["sunrise"]) * 1000);
-        let sunriseTime =  sunrise.getHours() + ":" + (sunrise.getMinutes()<10?'0':'') + sunrise.getMinutes();
+        let sunriseTime =  sunrise.getHours() % 12 + ":" + (sunrise.getMinutes()<10?'0':'') + sunrise.getMinutes() + " " + (sunrise.getHours() >= 12 ? "PM" : "AM");
         let sunset = new Date((data["city"]["sunset"]) * 1000);
-        let sunsetTime =  sunset.getHours() + ":" + (sunset.getMinutes()<10?'0':'') + sunset.getMinutes();
+        let sunsetTime =  sunset.getHours() % 12 + ":" + (sunset.getMinutes()<10?'0':'') + sunset.getMinutes() + " " + (sunset.getHours() >= 12 ? "PM" : "AM");
 
         document.getElementById("sunset-time-major").innerText = "Today's Sunset Time " + sunsetTime;
         document.getElementById("sunrise-time-minor").innerText = sunriseTime;
         document.getElementById("sunset-time-minor").innerText = sunsetTime;
 
-
         let weatherList = [];
         for (let i = 0; i < data["list"].length; i ++){
             let cur = {};
             cur.date = new Date(data["list"][i]["dt"] * 1000);
-            cur.humidity = data["list"][i]
+            cur.humidity = data["list"][i]["main"]["humidity"];
+            cur.temp = data["list"][i]["main"]["temp"];
+            cur.weather = data["list"][i]["weather"][0]["id"];
+            cur.pop = data["list"][i]["pop"];
+            if (data["list"][i]["rain"] !== undefined){
+                cur.rain = data["list"][i]["rain"]["3h"];
+            }else{
+                cur.rain = 0;
+            }
 
             weatherList.push(cur);
         }
+        console.log(weatherList);
+        document.getElementById("precipitation").innerText = weatherList[0].rain + " mm";
+        document.getElementById("pop").innerText = weatherList[0].pop * 100 + "%";
+
+        let table = document.getElementById("forecast-table");
+        table.innerHTML = "";
+        for (let i = 0; i < 7; i ++){
+            let weather = weatherList[i].weather;
+            let firstDigitStr = String(weather)[0];
+            let weatherString = "Sunny";
+            switch (firstDigitStr){
+                case "8":
+                    if (weather == "800") {
+                       weatherString = materialDict["7"];
+                    } else {
+                        weatherString = materialDict["8"];
+                    }
+                    break;
+                default:
+                    weatherString = materialDict[firstDigitStr];
+            }
+
+            table.innerHTML += "<a>" +
+                "<p>" +
+                "<spancolor>" + weatherList[i].date.getHours() % 12 + " " + (weatherList[i].date.getHours() >= 12 ? "PM" : "AM") + "</spancolor>" +
+                "</p>" +
+                "<p>" + dayShort[weatherList[i].date.getDay()] +"</p>" +
+                "<span class=\"material-symbols-rounded\">" +
+                 weatherString + "</span>" +
+                "<p>" +
+                "<bold>" + Math.round(weatherList[i].temp)+ "°C</bold>" +
+                "</p>" +
+                "</a>";
+            if (i !== 6){
+                table.innerHTML += "<hr class=\"line\">";
+            }
+        }
+
+        console.log(table)
+
 
     });
 }
