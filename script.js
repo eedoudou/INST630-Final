@@ -106,7 +106,16 @@ function getWeather(lat, lon){
 
         let table = document.getElementById("forecast-table");
         table.innerHTML = "";
+
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        let chartData = [];
+        chartData.push(["Time", "Temperature"]);
+
         for (let i = 0; i < 7; i ++){
+            let time = weatherList[i].date.getHours() % 12 + " " + (weatherList[i].date.getHours() >= 12 ? "PM" : "AM");
+            chartData.push([time, Math.round(weatherList[i].temp)]);
             let weather = weatherList[i].weather;
             let firstDigitStr = String(weather)[0];
             let weatherString = "Sunny";
@@ -137,8 +146,36 @@ function getWeather(lat, lon){
                 table.innerHTML += "<hr class=\"line\">";
             }
         }
+        function drawChart(input) {
+            console.log(chartData);
+            var data = google.visualization.arrayToDataTable(chartData);
 
-        console.log(table)
+
+            var options = {
+                curveType: 'function',
+                legend: {position: 'none'},
+                backgroundColor: {fill: 'transparent'},
+                hAxis: {
+                    baselineColor: 'none', textPosition: 'none', gridlines: {
+                        color: 'transparent'
+                    }
+                },
+                vAxis: {
+                    gridlines: {
+                        color: 'transparent'
+                    }
+                },
+                gridlines: {
+                    color: 'transparent'
+                }
+
+
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+            chart.draw(data, options);
+        }
 
 
     });
@@ -158,40 +195,5 @@ if (navigator.geolocation) {
     console.log("");
 }
 
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
-
-function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ['Week', 'Temp', 'Prec', 'Wind'],
-        ['Mon',  15,      20, 15],
-        ['Tues',  20,      22, 6],
-        ['Wed',  1,      25, 82],
-        ['Thur',  7,      36, 11],
-    ]);
-
-    var options = {
-        curveType: 'function',
-        legend: {position: 'none'},
-        backgroundColor: {fill: 'transparent'},
-        hAxis: {
-            baselineColor: 'none', textPosition: 'none', gridlines: {
-                color: 'transparent'
-            }
-        },
-        vAxis: {
-            textPosition: 'none', gridlines: {
-                color: 'transparent'
-            }
-        },
-        gridlines: {
-            color: 'transparent'
-        }
 
 
-    };
-
-    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-    chart.draw(data, options);
-}
