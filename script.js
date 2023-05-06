@@ -156,6 +156,12 @@ function getWeather(lat, lon){
 
 
             var options = {
+                chartArea: {
+                    left: 20,
+                    top: 30,
+                    width: 630
+                },
+
                 curveType: 'function',
                 legend: {position: 'none'},
                 backgroundColor: {fill: 'transparent'},
@@ -168,8 +174,8 @@ function getWeather(lat, lon){
 
                     viewWindowMode:'explicit',
                     viewWindow: {
-                        max:maxTemp,
-                        min:minTemp
+                        max:maxTemp + 2,
+                        min:minTemp - 2
                     },
                     gridlines: {
                         color: 'transparent'
@@ -194,19 +200,21 @@ function getWeather(lat, lon){
 let lat = 38.98;
 let lon = -76.93;
 if (navigator.geolocation) {
-    var positionOption = { timeout: 500, enableHighAccuracy: true };
+    var positionOption = { timeout: 200, enableHighAccuracy: true };
     var gpsFailed = function() {
         //use some 3rd party position solution(get position by your device ip)
+        console.log(lon, lat);
+        getWeather(lat, lon);
     };
     navigator.geolocation.getCurrentPosition(function (position){
         lon = position.coords.longitude;
         lat = position.coords.latitude;
 
+        console.log(lon, lat);
+        getWeather(lat, lon);
 
     }, gpsFailed, positionOption);
-};
+}
 
-console.log(lon, lat);
-getWeather(lat, lon);
 
 
