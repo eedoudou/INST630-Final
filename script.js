@@ -229,14 +229,14 @@ if (navigator.geolocation) {
 
 
 // Responsive Action
-
-menuBtn.addEventListener("click", () => {
-    sideMenu.style.display = "block";
-});
-
-closeBtn.addEventListener("click", () => {
-    sideMenu.style.display = "none";
-});
+//
+// menuBtn.addEventListener("click", () => {
+//     sideMenu.style.display = "block";
+// });
+//
+// closeBtn.addEventListener("click", () => {
+//     sideMenu.style.display = "none";
+// });
 
 
 
