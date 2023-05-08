@@ -150,6 +150,7 @@ function getWeather(lat, lon){
                 table.innerHTML += "<hr class=\"line\">";
             }
         }
+
         function drawChart(input) {
             console.log(chartData);
             var data = google.visualization.arrayToDataTable(chartData);
@@ -159,7 +160,9 @@ function getWeather(lat, lon){
                 chartArea: {
                     left: 20,
                     top: 30,
-                    width: 630
+                    right: 0,
+                    width: 'auto',
+                    height: 'auto'
                 },
 
                 curveType: 'linear',
@@ -193,6 +196,10 @@ function getWeather(lat, lon){
             chart.draw(data, options);
         }
 
+        $(window).resize(function(){
+            drawChart();
+        });
+
 
     });
 }
@@ -215,6 +222,19 @@ if (navigator.geolocation) {
 
     }, gpsFailed, positionOption);
 }
+
+
+
+// Responsive Action
+
+menuBtn.addEventListener("click", () => {
+    sideMenu.style.display = "block";
+});
+
+closeBtn.addEventListener("click", () => {
+    sideMenu.style.display = "none";
+});
+
 
 
 
